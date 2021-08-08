@@ -1,0 +1,16 @@
+<html>
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <script src="https://jsuites.net/v4/jsuites.webcomponents.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+     
+    <jsuites-calendar value="2020-01-20"></jsuites-calendar>
+     
+    <script>
+    document.querySelector('jsuites-calendar').addEventListener('onchange', function(e) {
+        console.log('New value: ' + e.target.value);
+    });
+    document.querySelector('jsuites-calendar').addEventListener('onclose', function(e) {
+        console.log('Calendar is closed');
+    });
+    </script>
+    </html>
