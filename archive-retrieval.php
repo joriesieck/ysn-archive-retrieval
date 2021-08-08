@@ -2,7 +2,7 @@
 /*
 Plugin Name: Archive Retrieval
 Version: 1.0
-Description: Allows the user to select a date from a calendar GUI and retrieves the appropriate issue for that date.
+Description: Allows the user to select a date from a calendar GUI and retrieves the link to the appropriate issue for that date.
 Author: Jorie Sieck
 Author URI: http://joriesieck.com
 License: GPL2
