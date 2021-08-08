@@ -3,29 +3,31 @@
 const entryContent = document.getElementsByClassName('entry-content')[0];	// there's only ever one entry-content
 // create a div to hold the calendar widget
 const calendarContainer = document.createElement('div');
+calendarContainer.setAttribute('id', 'archive-retrieval-calendar-container');
+const calendarTitle = document.createElement('h5');
+calendarTitle.textContent = "Select the date of the issue (Thursdays only):";
+calendarContainer.appendChild(calendarTitle);
 // get today's date
 const today = new Date();
 const todayStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
 // append the calendar with today's date as the value
-calendarContainer.innerHTML = `<jsuites-calendar ></jsuites-calendar>`;
+const calendar = document.createElement('jsuites-calendar');
+calendarContainer.appendChild(calendar);
 // append the calendar widget to entry content
 entryContent.appendChild(calendarContainer);
-// create an element to hold the potential error message
-const messageElem = document.createElement('p');
+// create an element to hold the potential error message or link
+const messageElem = document.createElement('div');
+messageElem.setAttribute('id', 'archive-retrieval-message-container');
 // append the element to entry content
-entryContent.appendChild(messageElem);
-// create an element to hold the potential link
-const linkElem = document.createElement('a');
-entryContent.appendChild(linkElem);
+calendarContainer.appendChild(messageElem);
 
 /* handle date picking */
-const calendar = document.querySelector('jsuites-calendar');
 calendar.addEventListener('onchange', (e) => {
+	messageElem.innerHTML = '';	// clear the message
 	// get the input value and convert it to a date object
 	const datePicked = new Date(e.target.value);
 	/* handle incorrect dates */
 	let message = '';
-	messageElem.textContent = message;	// reset the message, if there was one
 	const datePickedMS = datePicked.getTime();
 	const todayMS = today.getTime();
 	// non-thursday case (days are indexed 0-6, thursday is day 4)
@@ -36,7 +38,7 @@ calendar.addEventListener('onchange', (e) => {
 	else if (datePickedMS > (todayMS - 86400000*30)) message = 'Sorry, that issue has not yet been moved to the archives.';
 	
 	// if there is an error, print the message and don't do anything else.
-	if (message) messageElem.textContent = message;
+	if (message) messageElem.innerHTML = `<p>${message}</p>`;
 
 	// otherwise, generate the link
 	else {
@@ -66,8 +68,6 @@ calendar.addEventListener('onchange', (e) => {
 		}
 
 		// print the link
-		linkElem.href = link;
-		linkElem.setAttribute('target', '_blank');	// open in new tab
-		linkElem.textContent = `View the ${months[monthInd-1]} ${day}, ${fullYear} YSN Issue`;
+		messageElem.innerHTML = `<a href=${link} target="_blank">View the ${months[monthInd-1]} ${day}, ${fullYear} Issue</a>`;
 	}
 });

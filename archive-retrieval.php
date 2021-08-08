@@ -19,7 +19,7 @@ function archive_retrieval_setup() {
 		time(),
 		true
 	);
-	
+
 	// calendar scripts
 	wp_enqueue_script(
 		'jsuites',
@@ -34,10 +34,19 @@ function archive_retrieval_setup() {
 		true
 	);
 
-	// enqueue stylesheet
+	/* enqueue stylesheets */
+	// calendar styling
 	wp_enqueue_style(
 		'jsuites-css',
 		'https://jsuites.net/v4/jsuites.css',
+		[],
+		time(),
+		'all'
+	);
+	// my styling
+	wp_enqueue_style(
+		'styles-css',
+		plugins_url('styles.css',__FILE__),
 		[],
 		time(),
 		'all'
