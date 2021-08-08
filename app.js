@@ -67,6 +67,7 @@ calendar.addEventListener('onchange', (e) => {
 
 		// print the link
 		linkElem.href = link;
-		linkElem.textContent = `View the ${monthStr} ${day}, ${fullYear} YSN Issue`;
+		linkElem.setAttribute('target', '_blank');	// open in new tab
+		linkElem.textContent = `View the ${months[monthInd-1]} ${day}, ${fullYear} YSN Issue`;
 	}
 });
